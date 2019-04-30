@@ -66,6 +66,11 @@
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+	<dependency>
+	    <groupId>org.apache.poi</groupId>
+	    <artifactId>poi</artifactId>
+	    <version>4.1.0</version>
+	</dependency>
 <!--        <dependency>
             <groupId>com.itextpdf</groupId>
             <artifactId>itext7-core</artifactId>
