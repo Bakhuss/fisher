@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bakhuss.fisher.cdek.controller.CDEKController;
-import ru.bakhuss.fisher.cdek.report.CDEKReportExcel;
+import ru.bakhuss.fisher.cdek.report.model.ReportExcel;
 
 import java.util.Date;
 
@@ -25,7 +25,7 @@ public class CDEKControllerImpl implements CDEKController {
                                              @RequestParam(required = false) String countryCode) {
         byte[] bytes;
         try {
-            bytes = CDEKReportExcel.getRegions(size, page, countryCode);
+            bytes = ReportExcel.getRegions(size, page, countryCode);
             HttpHeaders headers = new HttpHeaders();
             String fileName = "attachment; filename=regions_" + new Date().toString() + ".xlsx";
             headers.set("Content-Disposition", fileName);
@@ -45,7 +45,7 @@ public class CDEKControllerImpl implements CDEKController {
                                             @RequestParam(required = false) String countryCode) {
         byte[] bytes;
         try {
-            bytes = CDEKReportExcel.getCities(size, page, countryCode);
+            bytes = ReportExcel.getCities(size, page, countryCode);
             HttpHeaders headers = new HttpHeaders();
             String fileName = "attachment; filename=cities_" + new Date().toString() + ".xlsx";
             headers.set("Content-Disposition", fileName);

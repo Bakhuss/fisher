@@ -1,5 +1,7 @@
-package ru.bakhuss.fisher.cdek.report;
+package ru.bakhuss.fisher.cdek.report.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -15,7 +17,9 @@ import ru.bakhuss.fisher.cdek.model.CDEKRegion;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-public class CDEKReportExcel {
+public class ReportExcel {
+    private static final Logger log = LoggerFactory.getLogger(ReportExcel.class);
+
     public static byte[] getRegions(String size, String page, String countryCode) throws Exception {
         if (size == null || !parseInt(size)) size = "";
         if (page == null || !parseInt(page)) page = "0";
@@ -51,6 +55,7 @@ public class CDEKReportExcel {
 
         List<CDEKRegion> body = regions.getBody();
         System.out.println("body regions size: " + body.size());
+	log.info("regions size: " + body.size());
         for (int i = 0; i < regions.getBody().size(); i++) {
             Row row = sheet0.createRow(i + 1);
             row.createCell(0).setCellValue(body.get(i).getRegionUuid());
@@ -68,7 +73,7 @@ public class CDEKReportExcel {
         }
 
 	Row row = sheet0.createRow(body.size()+2);
-	row.createCell(0);
+	row.createCell(0).setCellValue("This is a test of merging");
 	row.createCell(1);
 	row.createCell(2);
 	sheet0.addMergedRegion(new CellRangeAddress(body.size()+2, body.size()+2, 0, 2));
@@ -118,6 +123,7 @@ public class CDEKReportExcel {
 
         List<CDEKCity> body = cities.getBody();
         System.out.println("body cities size: " + body.size());
+	log.info("cities size: " + body.size());
         for (int i = 0; i < cities.getBody().size(); i++) {
             Row row = sheet0.createRow(i + 1);
             row.createCell(0).setCellValue(body.get(i).getCityUuid());
